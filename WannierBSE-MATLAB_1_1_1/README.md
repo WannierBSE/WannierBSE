@@ -44,7 +44,7 @@ WannierBSE supports direct-interaction calculations and, in v1.1.1, calculations
 > 
 > 📥 **Direct + Short-Range Exchange Route:** Exchange-enabled calculations require the internal Wannier90-based workflow. In addition to `wannier90_hr.dat`, users must provide real-space spinor Wannier functions in `/User_input/Wannier_functions_xsf/`, unless the required processed Wannier-function and exchange-interaction caches already exist in `/Precomputed_data/`.
 >
-> Examples 05–07 include short-range exchange. Due to GitHub file-size limitations, the real-space Wannier-function datasets and their processed caches are not included in the source distribution.
+> Examples 05–07 include short-range exchange. Due to GitHub file-size limitations, the real-space Wannier-function datasets and their processed caches are not included in the source distribution. The MoS₂ real-space spinor Wannier functions can be downloaded separately from the [WannierBSE v1.1.1 Release](https://github.com/WannierBSE/WannierBSE/releases/download/v1.1.1/1_MoS2_Wannier_functions_xsf.zip).
 >
 > **Dielectric Input:** For both routes, users may provide `epsilon.txt` in `/User_input/`; otherwise WannierBSE generates or loads dielectric data from `/Precomputed_data/`.
 
