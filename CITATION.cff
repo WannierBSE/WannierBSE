@@ -6,7 +6,7 @@ message: >
 title: WannierBSE
 type: software
 
-repository-code: https://github.com/WannierBSE/WannierBSE-MATLAB-
+repository-code: https://github.com/WannierBSE/WannierBSE
 
 preferred-citation:
   type: article

@@ -1,0 +1,66 @@
+cff-version: 1.2.0
+message: >
+  If you use WannierBSE in your research, please cite the following references
+  to support the continued development and maintenance of the software.
+
+title: WannierBSE
+type: software
+
+repository-code: https://github.com/WannierBSE/WannierBSE
+
+preferred-citation:
+  type: article
+  title: >
+    Distinctive Signatures of the Spin- and Momentum-Forbidden Dark Exciton States
+    in the Photoluminescence of Strained WSe2 Monolayers under Thermalization
+  authors:
+    - family-names: Peng
+      given-names: Guan-Hao
+    - family-names: Lo
+      given-names: Ping-Yuan
+    - family-names: Li
+      given-names: Wei-Hua
+    - family-names: Huang
+      given-names: Yan-Chen
+    - family-names: Chen
+      given-names: Yan-Hong
+    - family-names: Lee
+      given-names: Chi-Hsuan
+    - family-names: Yang
+      given-names: Chih-Kai
+    - family-names: Cheng
+      given-names: Shun-Jen
+  journal: Nano Letters
+  volume: 19
+  issue: 4
+  start: 2299
+  end: 2312
+  year: 2019
+  doi: 10.1021/acs.nanolett.8b04786
+
+references:
+  - type: article
+    title: >
+      The Key Role of Non-Local Screening in the Environment-Insensitive Exciton
+      Fine Structures of Transition-Metal Dichalcogenide Monolayers
+    authors:
+      - family-names: Li
+        given-names: Wei-Hua
+      - family-names: Lin
+        given-names: Jhen-Dong
+      - family-names: Lo
+        given-names: Ping-Yuan
+      - family-names: Peng
+        given-names: Guan-Hao
+      - family-names: Hei
+        given-names: Ching-Yu
+      - family-names: Chen
+        given-names: Shao-Yu
+      - family-names: Cheng
+        given-names: Shun-Jen
+    journal: Nanomaterials
+    volume: 13
+    issue: 11
+    number: 1739
+    year: 2023
+    doi: 10.3390/nano13111739

@@ -1,0 +1,7 @@
+% =========================================================================
+% WANNIER TIGHT-BINDING CONTROL PARAMETERS
+% =========================================================================
+
+% --- Band Index Selection ---
+VBM = 14       % Valence-band maximum index in the Wannier tight-binding model
+CBM = 15       % Conduction-band minimum index in the Wannier tight-binding model

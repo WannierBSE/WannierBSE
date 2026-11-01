@@ -1,8 +1,0 @@
-% =========================================================================
-% K-MESH CONTROL PARAMETERS
-% =========================================================================
-
-% --- Grid Definition ---
-Nk_coarse   = 15              % Sampling intervals along reciprocal basis vectors for the coarse BZ grid
-Nk_dense    = 15              % Sampling points inside each high-resolution dense region
-Dense_range = 3               % Dense-region radius in coarse-grid units; must be <= Nk_coarse/2

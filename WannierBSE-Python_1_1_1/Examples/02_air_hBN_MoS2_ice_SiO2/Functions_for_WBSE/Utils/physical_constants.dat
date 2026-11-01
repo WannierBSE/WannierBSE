@@ -1,0 +1,21 @@
+% Physical constants in SI units
+% This file is intended for internal use by the phys_constant.py script.
+% Do not modify unless you are sure about the physical units.
+
+% Bohr radius (m)
+aB = 5.291772105638410e-11
+
+% Elementary charge (C)
+e = 1.602176620800000e-19
+
+% Vacuum permittivity (F/m)
+eps0 = 8.854187817620389e-12
+
+% Reduced Planck constant (J*s)
+hbar = 1.054571800139113e-34
+
+% Electron rest mass (kg)
+m0 = 9.109383560000000e-31
+
+% Rydberg energy (J)
+Ry = 2.179872325390252e-18

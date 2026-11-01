@@ -1,0 +1,25 @@
+WannierBSE calculation report
+Generated at: 2026-10-30 09:17:59
+
+==================== INPUT DATA PROVENANCE ====================
+k-mesh source                                 = computed during current run
+TB data source                                = computed during current run
+dielectric screening source                   = provided by user
+
+==================== BSE BASIS ====================
+Number of k-points                            = Nk = 3750
+Valence bands used                            = Nv = 2
+Conduction bands used                         = Nc = 2
+
+==================== COULOMB INTERACTION ====================
+Short-range exchange interaction              = disabled
+
+==================== CPU USAGE ====================
+TB calculations                               Npar_TB                = 12
+BSE Hamiltonian construction                  Npar_HBSE              = 40
+
+==================== COMPUTATION TIME ====================
+BSE Hamiltonian matrix construction           =       23.075 sec
+BSE Hamiltonian diagonalization               =      571.679 sec
+Total BSE solver stage                        =      594.754 sec
+Total WBSE execution                          =      757.140 sec

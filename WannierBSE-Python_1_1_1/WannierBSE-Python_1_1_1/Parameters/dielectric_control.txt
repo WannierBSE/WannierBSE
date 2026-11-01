@@ -1,0 +1,19 @@
+% =========================================================================
+% DIELECTRIC FUNCTION CONTROL PARAMETERS
+% =========================================================================
+
+% --- Material Parameters ---
+alpha            = 1.55       % Dimensionless fitting parameter for dielectric response
+Epl              = 22.5       % Plasmon peak energy [eV]
+ep_p             = 13.24      % Static in-plane dielectric constant
+
+% --- Layer Architecture ---
+t_layers         = 1          % Number of dielectric layers above the TMD monolayer
+s_layers         = 1          % Number of dielectric layers below the TMD monolayer
+
+% --- Surrounding Dielectrics ---
+t_dielectric     = 5.89          % Dielectric constants above the TMD, ordered top to bottom
+s_dielectric     = 3.9          % Dielectric constants below the TMD, ordered top to bottom
+
+% --- Geometry and Boundaries ---
+layer_boundaries = 3.13, -3.13 % Layer boundary positions ordered top to bottom [Angstroms]

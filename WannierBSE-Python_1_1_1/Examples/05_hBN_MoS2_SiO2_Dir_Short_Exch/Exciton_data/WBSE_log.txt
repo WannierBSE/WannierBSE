@@ -1,0 +1,36 @@
+WannierBSE calculation report
+Generated at: 2026-10-29 14:13:18
+
+==================== INPUT DATA PROVENANCE ====================
+k-mesh source                                  = computed during current run
+TB data source                                 = computed during current run
+dielectric screening source                    = computed during current run
+Wannier-function source                        = preprocessed during current run from XSF files
+
+==================== BSE BASIS ====================
+Number of k-points                            = Nk = 3750
+Valence bands used                            = Nv = 2
+Conduction bands used                         = Nc = 2
+
+==================== COULOMB INTERACTION ====================
+Short-range exchange interaction              = enabled
+Exchange tensor source                        = computed during current run
+
+Nearest-neighbor Wannier shell                M_max                  = 1.0
+Largest short-range G-vector cutoff           G_max                  = 4.2
+Wannier truncation probability cutoff         tol_probability        = 0.98
+M-neighbor distance tolerance                 M_max_tolerance        = 0.01
+Nearest-neighbor distance tolerance           nn_distance_tolerance  = 0.15
+
+==================== CPU USAGE ====================
+TB calculations                               Npar_TB                = 12
+Exchange tensor calculation                   Npar_Xi                = 40
+BSE Hamiltonian construction                  Npar_HBSE              = 40
+
+==================== COMPUTATION TIME ====================
+rho overlap-density calculation               =       10.731 sec
+short-range exchange tensor calculation       =       74.423 sec
+BSE Hamiltonian matrix construction           =      216.306 sec
+BSE Hamiltonian diagonalization               =      244.596 sec
+Total BSE solver stage                        =      460.902 sec
+Total WBSE execution                          =      705.308 sec

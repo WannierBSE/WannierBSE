@@ -1,0 +1,16 @@
+% =========================================================================
+% BSE CONTROL PARAMETERS
+% =========================================================================
+
+% --- Physical Properties ---
+d              = 6.26       % Strict 2D hydrogen benchmark thickness [Angstroms]
+% --- BSE Calculation Options ---
+NVAL           = 100         % Number of exciton eigenvalues to compute
+Nc             = 1          % Number of conduction bands used in the BSE basis
+Nv             = 1          % Number of valence bands used in the BSE basis
+
+% --- Parallelization ---
+Npar_TB        = 12         % Number of cores for tight-binding band generation
+Npar_rho       = 40         % Maximum workers allowed for exchange overlap density rho; optimized rho may select fewer workers when faster
+Npar_Xi        = 40         % Number of cores for short-range exchange Xi integrals
+Npar_HBSE      = 40         % Number of cores for BSE Hamiltonian construction

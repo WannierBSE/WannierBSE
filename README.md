@@ -2,75 +2,67 @@
   <img src="pics/logo_light.svg#gh-light-mode-only" alt="WannierBSE Logo" width="700" height="auto">
   <img src="pics/logo_dark.svg#gh-dark-mode-only" alt="WannierBSE Logo" width="700" height="auto">
 
-# WannierBSE: High-Performance Bethe-Salpeter Equation Solver
+# WannierBSE v1.1.1
+
+<em>A Multiscale Exciton Simulation Package</em>
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![MATLAB](https://img.shields.io/badge/MATLAB-Supported-blue.svg)](https://www.mathworks.com/products/MATlab.html)
-[![GitHub Stars](https://img.shields.io/github/stars/WannierBSE/WannierBSE-MATLAB-?style=social)](https://github.com/WannierBSE/WannierBSE-MATLAB-)
+[![Python](https://img.shields.io/badge/Python-Supported-blue.svg)](https://www.python.org/)
+[![GitHub Stars](https://img.shields.io/github/stars/WannierBSE/WannierBSE?style=social)](https://github.com/WannierBSE/WannierBSE)
 
-[**Getting Started**](#getting-started) | [**Technical Workflow**](#technical-workflow) | [**Examples**](#examples) | [**Citation**](#citation) | [**Credits**](#credits) | [**Supported By**](#supported-by)
+[**Overview**](#overview) | [**Key Features**](#key-features) | [**Available Implementations**](#available-implementations) | [**Getting Started & Examples**](#getting-started--examples) | [**Citation**](#citation) | [**Credits**](#credits) | [**Supported By**](#supported-by)
 </div>
 
 ---
 
-**WannierBSE** is a high-performance computational suite for solving the **Bethe–Salpeter Equation (BSE)** within a Wannier tight-binding framework. Specifically optimized  for two-dimensional materials, it combines first-principles electronic-structure accuracy with the efficiency of Wannier-based interpolation.
+## Overview
 
-The general workflow begins with a density functional theory (DFT) calculation performed using Quantum ESPRESSO, VASP, or another first-principles code compatible with Wannier90. The DFT results are then processed with Wannier90 to construct a localized Wannier representation of the electronic structure. **WannierBSE** uses the generated Wannier Hamiltonian and related matrix elements to construct and solve the BSE.
+WannierBSE is a high-performance computational software package for solving the Bethe–Salpeter equation (BSE) within the Wannier tight-binding (WTB) framework, specifically designed for two-dimensional (2D) materials. It is available in both **MATLAB and Python** for investigating excitonic and optical properties.
 
-By leveraging MATLAB’s numerical capabilities, WannierBSE enables researchers to calculate exciton energies, excitonic wavefunctions, optical spectra, transition dipoles, and light–matter interactions in complex dielectric environments.
+WannierBSE provides a multiscale framework that bridges microscopic electronic-structure information obtained from first-principles calculations with macroscopic dielectric screening models. This approach enables the simulation of excitonic properties in different dielectric environments, including free-standing, substrate-supported, and encapsulated 2D materials.
 
-## Getting Started
+In addition to first-principles-based calculations, WannierBSE supports user-defined tight-binding electronic models for BSE calculations **when only the direct Coulomb interaction is considered**, allowing researchers to investigate excitonic properties without requiring Wannier functions generated from first-principles calculations.
 
-To get started with WannierBSE, please refer to our comprehensive documentation:
+Detailed instructions, input requirements, and computational examples are provided in the **User Guides and QuickStart Guides** for both implementations.
 
-*   [**User Guide (PDF)**](WannierBSE_v1.1_User_Guide.pdf) - Detailed technical manual and theory.
-*   [**QuickStart Guide (PDF)**](WannierBSE_v1.1_QuickStart_Guide.pdf) - Brief setup and first run instructions.
-*   [**Official Website**](https://quantum.web.nycu.edu.tw/wannierbse) - News and updates.
+## Key Features
 
-### Prerequisites
-*   **MATLAB** (Recommended: R2020b or later)
-*   **Parallel Computing Toolbox** (Highly recommended for large-scale calculations)
+- **Multiscale Exciton Simulations:** Integrates first-principles electronic structures within the Wannier tight-binding framework with continuum dielectric screening models to investigate excitons in 2D materials.
 
-## Technical Workflow
+- **Flexible Electronic-Structure Inputs:** Supports Wannier90-derived Hamiltonians and user-defined tight-binding models, with external electronic models available for direct-interaction-only calculations.
 
-WannierBSE features a modular data pipeline designed to handle both raw generation and pre-computed data ingestion.
+- **Nonlocal Dielectric Screening:** Incorporates momentum-dependent dielectric screening through a built-in Poisson solver for layered heterostructures or user-supplied dielectric functions.
 
-### 1. Data Preparation
-WannierBSE supports direct-interaction calculations and, in v1.1, calculations including short-range electron-hole exchange.
+- **Direct and Short-Range Exchange Interactions:** Constructs the BSE Hamiltonian including screened electron–hole attraction and optional short-range exchange interactions evaluated from real-space spinor Wannier functions.
 
-> 🔄 **Direct-Interaction Route:** Users may either place `wannier90_hr.dat` in `/User_input/` and let WannierBSE generate the k-mesh and tight-binding bands internally, or provide a matched external dataset using `kmesh.txt` and `TB_data/` files such as `v*_TB.txt` and `c*_TB.txt`. Structural information is read from `structure.txt` or `wannier90.win` in `/User_input/`.
-> 
-> 📥 **Direct + Short-Range Exchange Route:** Exchange-enabled calculations require the internal Wannier90-based workflow. In addition to `wannier90_hr.dat`, users must provide real-space spinor Wannier functions in `/User_input/Wannier_functions_xsf/`, unless the required processed Wannier-function and exchange-interaction caches already exist in `/Precomputed_data/`.
->
-> **Dielectric Input:** For both routes, users may provide `epsilon.txt` in `/User_input/`; otherwise WannierBSE generates or loads dielectric data from `/Precomputed_data/`.
+- **Nonuniform Momentum-Space Sampling:** Generates momentum grids with refined sampling around the K and K′ valleys to improve resolution in exciton calculations.
 
-### 2. Configuration & Control
-The simulation environment is governed by dedicated control files located in the `/Parameters/` directory:
-*   `control.txt`, `WTB_control.txt`, `WF_centers.txt`
-*   `kmesh_control.txt`, `dielectric_control.txt`
-*   `exchange_control.txt`
+- **Excitonic Eigenstates:** Computes exciton energies and momentum-space wavefunctions, providing numerical results for further excitonic and optical analysis.
 
-### 3. Execution & Visualization
-1.  **Core Solver:** Execute `WBSE.m` in MATLAB. The script utilizes an optimized, symmetry-aware Hamiltonian constructor and a high-performance parallelized solver.
-2.  **Post-Processing:** Use the auxiliary script `Ex_plot.m` to visualize the exciton energy spectrum.
-3.  **Data Management:** Main outputs, including energy spectra (`Ex.mat`) and wavefunctions (`A.mat`), are saved in the `/Exciton_data/` folder together with run-related output files.
+## Available Implementations
 
-## Examples
+| | MATLAB | Python |
+|---|---|---|
+| **Version** | v1.1.1 | v1.1.1 |
+| **Main program** | `WBSE.m` | `WBSE.py` |
+| **Software requirements** | MATLAB with Parallel Computing Toolbox | Python with required scientific libraries |
+| **Source code** | [MATLAB Package](WannierBSE-MATLAB_1_1_1/) | [Python Package](WannierBSE-Python_1_1_1/) |
+| **Documentation** | [User Guide](WannierBSE-MATLAB_1_1_1/WannierBSE_MATLAB_v1_1_1_User_Guide.pdf) | [User Guide](WannierBSE-Python_1_1_1/WannierBSE_Python_v1_1_1_User_Guide.pdf) |
+| **QuickStart** | [MATLAB QuickStart](WannierBSE-MATLAB_1_1_1/WannierBSE-MATLAB_v1.1.1_QuickStart_Guide.pdf) | [Python QuickStart](WannierBSE-Python_1_1_1/WannierBSE-Python_v1.1.1_QuickStart_Guide.pdf) |
 
-To help you get started quickly, we provide several pre-configured examples in the repository. These include sample input files and parameters for direct-interaction and direct-plus-short-range-exchange workflows in typical 2D materials.
+For implementation-specific instructions, see the [MATLAB README](WannierBSE-MATLAB_1_1_1/README.md) and [Python README](WannierBSE-Python_1_1_1/README.md).
 
-📂 [**Browse Examples in the Repository**](https://github.com/WannierBSE/WannierBSE-MATLAB-/tree/main/Examples)
+## Getting Started & Examples
 
-Each example includes:
-*   User input and precomputed data files
-*   Ready-to-use control parameter files
-*   Expected results.
+To begin, select your preferred implementation and follow its **QuickStart Guide** for installation, configuration, and execution instructions.
 
-### Large Wannier90 Spinor Projection Files
+Both implementations include **seven example calculations**, covering different dielectric environments, user-defined tight-binding models, and direct Coulomb interactions with or without short-range exchange.
 
-Examples 05, 06, and 07 use Wannier90 spinor projection files to reproduce the reported results. These files are not included in `WannierBSE_v1.1.zip` because of their size.
+- [MATLAB Examples](WannierBSE-MATLAB_1_1_1/Examples/)
+- [Python Examples](WannierBSE-Python_1_1_1/Examples/)
 
-To reproduce these examples, download `WannierBSE_v1.1_Wannier90_spinor_projections.zip` from the v1.1 GitHub Release and extract the `Wannier_functions_xsf` folder into the corresponding `User_input/` folder. The large precomputed `WF_up.mat` and `WF_down.mat` cache files for these examples are also provided as separate v1.1 release assets.
+For detailed information on the theoretical framework, input-file formats, simulation parameters, and output data, refer to the corresponding **User Guide**.
 
 ## Citation
 
@@ -88,7 +80,7 @@ To support the continued development of WannierBSE, please cite the following re
 
 ## Credits
 
-Developed by the research group of **Prof. Shun-Jen Cheng** at National Yang Ming Chiao Tung University (NYCU).
+Developed by the research group of **Prof. Shun-Jen Cheng** at National Yang Ming Chiao Tung University (NYCU). [**Official Website**](https://quantum.web.nycu.edu.tw/wannierbse)
 
 **Core Developers:**
 *   Dr. Ping-Yuan Lo, Dr. Wei-Hua Li, Dr. Guan-Hao Peng, Dr. Jhen-Dong Lin, Dr. Vo Khuong Dien, Dr. Oscar Javier Gomez Sanchez, Mr. Ching-Hung Shih, Mr. Kun-Yi Lin, and Prof. Shun-Jen Cheng.

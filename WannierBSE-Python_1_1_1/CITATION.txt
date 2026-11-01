@@ -1,0 +1,22 @@
+To support the continued development and maintenance of WannierBSE, we kindly ask that you cite the following references in any publication resulting from the use of this software.
+
+Primary Reference
+
+For the general use of the WannierBSE code, please cite: 
+
+Guan-Hao Peng, Ping-Yuan Lo, Wei-Hua Li, Yan-Chen Huang, Yan-Hong Chen,
+Chi-Hsuan Lee, Chih-Kai Yang, and Shun-Jen Cheng, 
+"Distinctive Signatures of the Spin- and Momentum-Forbidden Dark Exciton States in the Photoluminescence of Strained WSe2 Monolayers under Thermalization",
+Nano Lett. 19, 4, 2299–2312 (2019). 
+https://doi.org/10.1021/acs.nanolett.8b04786
+
+
+Non-local Dielectric Function
+
+If you utilize the semiclassical Poisson solver to calculate the non-local dielectric function, please also cite:
+
+Wei-Hua Li, Jhen-Dong Lin, Ping-Yuan Lo, Guan-Hao Peng,
+Ching-Yu Hei, Shao-Yu Chen, and Shun-Jen Cheng, 
+"The Key Role of Non-Local Screening in the Environment-Insensitive Exciton Fine Structures of Transition-Metal Dichalcogenide Monolayers",
+Nanomaterials 13, 11, 1739 (2023).
+https://doi.org/10.3390/nano13111739
