@@ -1,10 +1,12 @@
-"""Plot the exciton energy spectrum produced by the Python WBSE solver.
-
-The utility reads the real-valued exciton energies in
-``Exciton_data/Ex.txt``. The file is written by ``WBSE.py`` in electron-volts,
-with one energy per row and a comment header. The resulting figure shows the
-energy levels using the package's publication-oriented styling.
-"""
+# =========================================================================
+# PLOT_EXCITON_LEVELS.PY
+# =========================================================================
+# Summary:   Loads and visualizes exciton energy spectra from Ex.txt data.
+#
+# Features:
+#   - Aspect Ratio Control for publication-quality visuals.
+#   - Automated multi-format export (PDF/PNG).
+# =========================================================================
 
 from pathlib import Path
 
@@ -15,22 +17,41 @@ import numpy as np
 def main() -> None:
     """Load exciton energies, plot their levels, and save the figure."""
 
+    # %% ---------------------------------------------------------------------
+    #  1. GLOBAL USER CONFIGURATION (EDIT HERE)
+    # ------------------------------------------------------------------------
+
+    # -- Bandgap Energy --
+    Eg = 0.0  # In eV. If Eg=0, plot the exciton energy; otherwise, plot Eb=Ex-Eg.
+
+    # -- Energy Display Unit --
+    energyUnit = "eV"  # Options: 'eV' or 'meV'
+
+    # -- File & Path Settings --
     config = {
         "dataPath": "Exciton_data",
         "dataFile": "Ex.txt",
         "pngOutput": "Ex_plot.png",
         # "pdfOutput": "Ex_plot.pdf",
+
+        # -- Visual Styling --
         "lineWidth": 2.0,
         "lineColor": [0.1, 0.25, 0.60],
         "fontSize": 18,
-        "fontName": "Helvetica",
+        "fontName": "Nimbus Sans",
         "aspectRatio": 2.8,
+
+        # -- Export Parameters --
         "dpi": "-r300",
         "rightMargin": 0.30,
     }
 
     plt.close("all")
     print("\n>> Initializing Exciton Plotting Suite...")
+
+    # %% ---------------------------------------------------------------------
+    #  2. DATA INITIALIZATION & LOADING
+    # ------------------------------------------------------------------------
 
     script_dir = Path(__file__).resolve().parent
     file_path = script_dir / config["dataPath"] / config["dataFile"]
@@ -50,6 +71,41 @@ def main() -> None:
     if ex.size == 0:
         raise ValueError(f"Exciton energy file is empty: {file_path}")
 
+    # Calculate the physical energy quantity first, then convert for display.
+    if Eg == 0:
+        plot_energy = ex
+    else:
+        plot_energy = ex - Eg
+
+    normalized_energy_unit = energyUnit.lower()
+    if normalized_energy_unit == "ev":
+        energy_scale = 1.0
+        energy_unit_label = "eV"
+    elif normalized_energy_unit == "mev":
+        energy_scale = 1000.0
+        energy_unit_label = "meV"
+    else:
+        raise ValueError(
+            f"Invalid energy unit [{energyUnit}]. Use 'eV' or 'meV'."
+        )
+
+    plot_energy = energy_scale * plot_energy
+
+    if Eg == 0:
+        y_axis_label = (
+            rf"$E^{{X}}\ "
+            rf"\mathrm{{({energy_unit_label})}}$"
+        )
+    else:
+        y_axis_label = (
+            rf"$E^{{X}}-E_{{g}}\ "
+            rf"\mathrm{{({energy_unit_label})}}$"
+        )
+
+    # %% ---------------------------------------------------------------------
+    #  3. CORE PLOTTING ENGINE
+    # ------------------------------------------------------------------------
+
     fig, ax = plt.subplots(
         figsize=(4.0, 6.0),
         facecolor="white",
@@ -57,7 +113,7 @@ def main() -> None:
     )
     fig.patch.set_facecolor("white")
 
-    for energy in ex:
+    for energy in plot_energy:
         ax.plot(
             [0.0, 1.0],
             [energy, energy],
@@ -68,14 +124,11 @@ def main() -> None:
     ax.set_box_aspect(config["aspectRatio"])
     ax.set_xlim(0.0, 1.0)
     ax.set_xticks([])
-    ax.set_ylabel(
-        r"$\mathrm{Exciton\ energy}\ E^{X} \ \mathrm{(eV)}$",
-        fontsize=config["fontSize"] + 2,
-    )
+    ax.set_ylabel(y_axis_label, fontsize=config["fontSize"] + 2)
 
     y_limits = ax.get_ylim()
     ylim_padding = (y_limits[1] - y_limits[0]) * 0.05
-    ax.set_ylim(y_limits[0] - ylim_padding, np.max(ex))
+    ax.set_ylim(y_limits[0] - ylim_padding, np.max(plot_energy))
 
     ax.set_facecolor("white")
     ax.tick_params(
@@ -92,6 +145,10 @@ def main() -> None:
     for spine in ax.spines.values():
         spine.set_visible(True)
         spine.set_linewidth(1.5)
+
+    # %% ---------------------------------------------------------------------
+    #  4. EXPORT & FILESYSTEM MANAGEMENT
+    # ------------------------------------------------------------------------
 
     output_relative_path = Path(config["dataPath"]) / "Figures"
     output_dir = script_dir / output_relative_path
@@ -125,3 +182,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# =========================================================================
+# END OF SCRIPT
+# =========================================================================

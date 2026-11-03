@@ -14,6 +14,12 @@ clear; clc; close all;
 %  1. GLOBAL USER CONFIGURATION (EDIT HERE)
 %  ------------------------------------------------------------------------
 
+% -- Bandgap Energy --
+Eg = 0;  % In eV. If Eg=0, plot the exciton energy; otherwise, plot Eb=Ex-Eg.
+
+% -- Energy Display Unit --
+config.energyUnit = 'eV';  % Options: 'eV' or 'meV'
+
 % -- File & Path Settings --
 config.dataPath     = 'Exciton_data';  % Folder containing the results
 config.dataFile     = 'Ex.mat';         % Input filename
@@ -48,6 +54,35 @@ end
 fprintf('>> Loading dataset: %s\n', filePath);
 load(filePath, 'Ex'); 
 
+% Select the energy quantity to plot and its corresponding axis label.
+if Eg == 0
+    plotEnergy = Ex;
+else
+    plotEnergy = Ex - Eg;
+end
+
+% Convert the selected energy quantity for display.
+switch lower(config.energyUnit)
+    case 'ev'
+        energyScale = 1;
+        energyUnitLabel = 'eV';
+    case 'mev'
+        energyScale = 1000;
+        energyUnitLabel = 'meV';
+    otherwise
+        error('Invalid energy unit [%s]. Use ''eV'' or ''meV''.', ...
+            config.energyUnit);
+end
+plotEnergy = energyScale * plotEnergy;
+
+if Eg == 0
+    yAxisLabel = ['$E^{X}\ \mathrm{(' ...
+        energyUnitLabel ')}$'];
+else
+    yAxisLabel = ['$E^{X}-E_{g}\ \mathrm{(' ...
+        energyUnitLabel ')}$'];
+end
+
 %% ------------------------------------------------------------------------
 %  3. CORE PLOTTING ENGINE
 %  ------------------------------------------------------------------------
@@ -59,8 +94,8 @@ ax = axes('Parent', fig);
 
 % Render Energy Levels
 hold(ax, 'on');
-for i = 1:length(Ex)
-    line(ax, [0, 1], [Ex(i), Ex(i)], ...
+for i = 1:length(plotEnergy)
+    line(ax, [0, 1], [plotEnergy(i), plotEnergy(i)], ...
         'Color', config.lineColor, ...
         'LineWidth', config.lineWidth);
 end
@@ -73,14 +108,14 @@ xlim(ax, [0, 1]);
 set(ax, 'XTick', []); 
 
 % LaTeX Labeling
-ylabel(ax, '$\mathrm{Exciton\ energy}\ E^{X} \ \mathrm{(eV)}$', ...
+ylabel(ax, yAxisLabel, ...
     'Interpreter', 'latex', ...
     'FontSize', config.fontSize + 2); 
 
 % Calculate Padding
 ylimits = ylim(ax);
 ylim_padding = (ylimits(2) - ylimits(1)) * 0.05; 
-ylim(ax, [ylimits(1) - ylim_padding, max(Ex)]);
+ylim(ax, [ylimits(1) - ylim_padding, max(plotEnergy)]);
 
 % Final Axis Formatting
 set(ax, ...
