@@ -585,7 +585,7 @@ def _read_wf_centers_spinor(path: str | Path) -> WFMetadata:
     header_idx = None
     for i, line in enumerate(raw_lines):
         toks = line.split()
-        if len(toks) >= 2 and toks[0].lower() == "i" and toks[1].lower() == "i":
+        if len(toks) >= 2 and toks[0].lower() in {"i", "j"} and toks[1].lower() == "i":
             header_idx = i
             break
     if header_idx is None or header_idx == len(raw_lines) - 1:

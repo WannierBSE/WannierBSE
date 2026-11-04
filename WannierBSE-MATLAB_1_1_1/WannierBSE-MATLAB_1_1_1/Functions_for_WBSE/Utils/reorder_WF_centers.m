@@ -36,7 +36,7 @@ function reorder_WF_centers(wf_centers_in, wf_centers_out)
     end
     cleanup = onCleanup(@() fclose(fid));
 
-    fprintf(fid, '   i     I     Spinor\n');
+    fprintf(fid, '   j     I     Spinor\n');
     for n = 1:NB
         fprintf(fid, '  %3d   %3d     %s\n', out_index(n), out_atom(n), char(out_spin(n)));
     end

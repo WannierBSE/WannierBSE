@@ -2,10 +2,10 @@
 % WANNIER FUNCTION CENTER MAP
 % =========================================================================
 %
-% Column i is the Wannier-function index.
+% Column j is the Wannier-function index.
 % Column I is the corresponding atom index from the atoms_cart order in wannier90.win.
 % Column Spinor labels the spinor component for each Wannier function.
-   i     I     Spinor
+   j     I     Spinor
    1     2     up
    2     2     down
    3     2     up

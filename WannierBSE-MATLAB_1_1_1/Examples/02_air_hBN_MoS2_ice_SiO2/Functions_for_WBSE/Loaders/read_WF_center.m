@@ -169,7 +169,7 @@ function header_idx = find_wf_header(lines)
     header_idx = [];
     for n = 1:numel(lines)
         tok = split(strtrim(lines(n)));
-        if numel(tok) >= 2 && strcmpi(tok(1), 'i') && strcmpi(tok(2), 'I')
+        if numel(tok) >= 2 && any(strcmpi(tok(1), {'i', 'j'})) && strcmpi(tok(2), 'I')
             header_idx = n;
             return;
         end

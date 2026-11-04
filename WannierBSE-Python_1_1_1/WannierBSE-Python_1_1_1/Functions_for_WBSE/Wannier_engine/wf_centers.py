@@ -187,7 +187,7 @@ def reorder_wf_centers_py(wf_centers_in: str | Path, wf_centers_out: str | Path)
     wf_centers_out = Path(wf_centers_out)
     wf_centers_out.parent.mkdir(parents=True, exist_ok=True)
     with wf_centers_out.open("w") as handle:
-        handle.write("   i     I     Spinor\n")
+        handle.write("   j     I     Spinor\n")
         for idx, (atom, spinor) in enumerate(zip(out_atoms, out_spinors), start=1):
             handle.write(f"  {idx:3d}   {int(atom):3d}     {spinor}\n")
     return reorder_map
